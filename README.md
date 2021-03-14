@@ -20,7 +20,9 @@ mvn spring-boot:run
 ```
 ## endpoint
 ```{host:port}/test?modeA=true&modeB=true ```
+
 When you set up modeA = true, the processA will be success, otherwise it'll throw an exception.
+ 
 
 
  
