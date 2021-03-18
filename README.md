@@ -18,7 +18,7 @@ mvn install
 # Run the app
 mvn spring-boot:run
 ```
-## endpoint
+## Example of endpoint 
 ```{host:port}/test?modeA=true&modeB=true ```
 
 When you set up modeA = true, the processA will be success, otherwise it'll throw an exception.
