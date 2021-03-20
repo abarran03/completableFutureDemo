@@ -1,12 +1,20 @@
 package com.example.demo.services;
 
 import com.example.demo.exceptions.ModuleException;
+import org.slf4j.MDC;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.concurrent.Executor;
+
 @org.springframework.stereotype.Service
 public class ServiceB implements IServiceB {
 
+    @Autowired
+    private Executor executor;
+
     public String processService(Boolean mode) throws ModuleException, InterruptedException {
         long start = System.currentTimeMillis();
-        System.out.println("Start B....");
+        System.out.println("Start B.... " + MDC.get("trace"));
         try{
             if(mode){
                 Thread.sleep(8000L);
@@ -19,4 +27,12 @@ public class ServiceB implements IServiceB {
         }
 
     }
+
+    @Override
+    public Executor getExecutor() {
+        return executor;
+    }
+
+
+
 }

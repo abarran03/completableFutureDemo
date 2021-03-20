@@ -5,10 +5,13 @@ import com.example.demo.messaging.CompletableFutureResponseWrapper;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
+import java.util.concurrent.Executor;
 
 public interface ICompletableFutureService {
 
     String processService(Boolean mode) throws ModuleException, InterruptedException ;
+
+    Executor getExecutor();
 
     default CompletableFuture<CompletableFutureResponseWrapper> process(Boolean mode) {
         return CompletableFuture.supplyAsync(()-> {
@@ -22,6 +25,6 @@ public interface ICompletableFutureService {
                     }
                     return res;
                 }
-        );
+        , getExecutor());
     }
 }

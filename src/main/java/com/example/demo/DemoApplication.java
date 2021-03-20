@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.decorator.MdcTaskDecorator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -16,12 +17,13 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	@Bean
+	@Bean("taskExecutor")
 	public Executor taskExecutor() {
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
 		executor.setCorePoolSize(2);
 		executor.setMaxPoolSize(2);
 		executor.setQueueCapacity(500);
+		executor.setTaskDecorator(new MdcTaskDecorator());
 		executor.setThreadNamePrefix("GithubLookup-");
 		executor.initialize();
 		return executor;

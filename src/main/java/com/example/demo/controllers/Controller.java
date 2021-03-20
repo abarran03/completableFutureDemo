@@ -5,6 +5,7 @@ import com.example.demo.messaging.CompletableFutureResponseWrapper;
 import com.example.demo.messaging.JsonResponse;
 import com.example.demo.services.IServiceA;
 import com.example.demo.services.IServiceB;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,7 +30,7 @@ public class Controller {
     @GetMapping(value="test", produces= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<JsonResponse>>  test(@RequestParam String modeA, @RequestParam String modeB) throws ModuleException, InterruptedException, ExecutionException {
         long start = System.currentTimeMillis();
-
+        MDC.put("trace", "123");
         CompletableFuture<CompletableFutureResponseWrapper> t1 = serviceA.process(Boolean.valueOf(modeA));
         CompletableFuture<CompletableFutureResponseWrapper> t2 = serviceB.process(Boolean.valueOf(modeB));
         // Wait until they are all done
