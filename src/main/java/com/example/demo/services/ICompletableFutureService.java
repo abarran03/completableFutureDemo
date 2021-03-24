@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import com.example.demo.exceptions.ModuleException;
 import com.example.demo.messaging.CompletableFutureResponseWrapper;
+import org.springframework.scheduling.annotation.Async;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
